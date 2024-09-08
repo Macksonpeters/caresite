@@ -2,6 +2,7 @@
 
 import { Lato } from "next/font/google";
 import { useEffect, useState } from "react";
+import { useMediaQuery } from "@react-hook/media-query";
 
 const lato = Lato({
   weight: ["100", "300", "400", "700", "900"],
@@ -9,21 +10,21 @@ const lato = Lato({
   style: "normal",
 });
 
-const images = [
-  "/images/homecare.jpg",
-  "/images/seniortwo.jpg",
-  "/images/seniorseven.jpg",
-];
-
-const mobileImages = [
-  "/images/homecaremobile.jpg",
-  "/images/seniortwomobile.jpg",
-  "/images/seniorsevenmobile.jpg",
-];
-
 const Hero = () => {
   const [header, setHeader] = useState<any>(null);
   const [openComingSoon, setOpenComingSoon] = useState<any>(null);
+
+  const images = [
+    "/images/homecare.jpg",
+    "/images/seniortwo.jpg",
+    "/images/seniorseven.jpg",
+  ];
+
+  const mobileImages = [
+    "/images/homecaremobile.jpg",
+    "/images/seniortwomobile.jpg",
+    "/images/seniorsevenmobile.jpg",
+  ];
 
   const headers = [
     {
@@ -51,10 +52,10 @@ const Hero = () => {
     }
   };
 
-  const width = window.innerWidth;
+  const isNotMobile = useMediaQuery("(max-width: 1024px)");
 
   const [currentImage, setCurrentImage] = useState<string>(
-    width < 1024 ? mobileImages[0] : images[0]
+    isNotMobile ? mobileImages[0] : images[0]
   );
   const [prevImage, setPrevImage] = useState<string>(currentImage);
 
@@ -68,25 +69,24 @@ const Hero = () => {
     const intervalId = setInterval(() => {
       if (currentImage === images[0] || currentImage === mobileImages[0]) {
         setPrevImage(currentImage);
-        setCurrentImage(width < 1024 ? mobileImages[1] : images[1]);
+        setCurrentImage(isNotMobile ? mobileImages[1] : images[1]);
       } else if (
         currentImage === images[1] ||
         currentImage === mobileImages[1]
       ) {
         setPrevImage(currentImage);
-        setCurrentImage(width < 1024 ? mobileImages[2] : images[2]);
+        setCurrentImage(isNotMobile ? mobileImages[2] : images[2]);
       } else if (
         currentImage === images[2] ||
         currentImage === mobileImages[2]
       ) {
         setPrevImage(currentImage);
-        setCurrentImage(width < 1024 ? mobileImages[0] : images[0]);
+        setCurrentImage(isNotMobile ? mobileImages[0] : images[0]);
       }
     }, 7000);
 
     return () => clearInterval(intervalId);
-  }, [currentImage, width]);
-
+  }, [currentImage, !isNotMobile]);
   return (
     <div
       style={{

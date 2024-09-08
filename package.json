@@ -13,6 +13,7 @@
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.2.1",
+    "@react-hook/media-query": "^1.1.1",
     "@tanstack/react-query": "^5.55.0",
     "animate.css": "^4.1.1",
     "axios": "^1.7.7",
@@ -28,6 +29,7 @@
     "react-icons": "^5.2.1",
     "react-multi-carousel": "^2.8.5",
     "react-responsive-carousel": "^3.2.23",
+    "sharp": "^0.33.5",
     "swiper": "^11.1.12",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7"
