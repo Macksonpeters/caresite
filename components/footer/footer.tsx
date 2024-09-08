@@ -204,27 +204,29 @@ const Footer = () => {
     },
   ];
   return (
-    <div className="w-full bg-[#640d57] text-white  ">
-      <div className="flex flex-col lg:flex-row flex-wrap justify-between gap-10 px-5 lg:px-[100px] lg:gap-4 py-10 lg:py-20">
-        <div className="w-full md:w-[45%] lg:w-[30%] flex ">
-          <div className="">
-            <Image
-              src={FullLogo}
-              //   width={100}
-              //   height={50}
-              alt="Joyce-home-logo"
-              className="inline object-contain w-[inherit] scale-[370%] h-[90px] ps-10 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
-            />
-            <ul className="flex flex-col  text-[#887d52] gap-3 mt-4 justify-between">
-              {careTypes.slice(0, 4)?.map((item: any, index: any) => {
-                return (
-                  <li key={index} className={`capitalize z-20 `}>
-                    <a href={"/services"}>{item?.title}</a>
-                  </li>
-                );
-              })}
-            </ul>
+    <div className="w-full bg-gradient-to-b md:bg-gradient-to-r from-black to-[#640d57] text-white  ">
+      <div className="flex flex-col  lg:flex-row flex-wrap justify-between gap-10 px-5 lg:px-[100px] lg:gap-4 py-10 lg:py-20">
+        <div className="w-full   md:w-[45%] lg:w-[30%] ">
+          <div className="overflow-y-hidden ps-4 py-2">
+            <a href="/">
+              <Image
+                src={FullLogo}
+                //   width={100}
+                //   height={50}
+                alt="Joyce-home-logo"
+                className="inline object-contain w-[inherit]  scale-[370%] h-[90px] ps-9 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
+              />
+            </a>
           </div>
+          <ul className="flex flex-col  text-[#887d52] gap-3 mt-4 justify-between">
+            {careTypes.slice(0, 4)?.map((item: any, index: any) => {
+              return (
+                <li key={index} className={`capitalize z-20 `}>
+                  <a href={"/services"}>{item?.title}</a>
+                </li>
+              );
+            })}
+          </ul>
         </div>
 
         <div className="w-full md:w-[45%] lg:w-[30%] flex flex-col gap-4">

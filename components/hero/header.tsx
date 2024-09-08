@@ -14,16 +14,24 @@ const Header = () => {
         </p>
         <p className="hidden lg:flex">
           <span className="font-[600] capitalize">Email:</span>
-          <span className="ps-[2px]">joycecarehome14@yahoo.com</span>
+          <a href="mailto:joycecarehome14@yahoo.com" className="ps-[2px]">
+            joycecarehome14@yahoo.com
+          </a>
         </p>
         <p className="hidden lg:flex">
           <span className="font-[600]">Opening Hours:</span> 07:00am to 07:00pm
         </p>
       </div>
       <div className="flex gap-4 items-center">
-        <BsTwitterX />
-        <BsFacebook className="text-[16px] 3xl:text-[21px]" />
-        <BsWhatsapp className="text-[16px] 3xl:text-[21px]" />
+        <a href="">
+          <BsTwitterX />
+        </a>
+        <a href="">
+          <BsFacebook className="text-[16px] 3xl:text-[21px]" />
+        </a>
+        <a href="">
+          <BsWhatsapp className="text-[16px] 3xl:text-[21px]" />
+        </a>
       </div>
     </div>
   );

@@ -61,13 +61,13 @@ const Navigation = () => {
 
   return (
     <div
-      className={`w-full z-50  right-0 ${
+      className={`w-full z-50 overflow-y-hidden right-0 ${
         isInView ? "relative" : "fixed top-0 "
       } bg-[#fffbfa] transition-transform duration-300`}
     >
       <div className="flex px-5 lg:px-[100px] justify-between items-center gap-4 w-full py-3 text-[18px] 3xl:text-[1.6rem] text-[#421910]">
         <div className="w-1/4 flex items-center">
-          <p>
+          <a href="/" className="">
             <Image
               src={FullLogo}
               //   width={100}
@@ -75,7 +75,7 @@ const Navigation = () => {
               alt="Joyce-home-logo"
               className="inline object-contain w-[inherit] scale-[370%] h-[90px] ps-7 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
             />
-          </p>
+          </a>
         </div>
         <div className="hidden lg:block w-2/4">
           <ul className="flex justify-between lg:text-[14px] xl:text-[17px]">
