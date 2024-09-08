@@ -62,7 +62,7 @@ const Navigation = () => {
   return (
     <div
       className={`w-full z-50  right-0 ${
-        isInView ? "relative" : "fixed top-0"
+        isInView ? "relative" : "fixed top-0 "
       } bg-[#fffbfa] transition-transform duration-300`}
     >
       <div className="flex px-5 lg:px-[100px] justify-between items-center gap-4 w-full py-3 text-[18px] 3xl:text-[1.6rem] text-[#421910]">
