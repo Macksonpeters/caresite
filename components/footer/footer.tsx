@@ -214,7 +214,7 @@ const Footer = () => {
                 //   width={100}
                 //   height={50}
                 alt="Joyce-home-logo"
-                className="inline object-contain w-[inherit]  scale-[370%] h-[90px] ps-9 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
+                className="inline object-contain w-[inherit]  scale-[250%] lg:scale-[370%] h-[90px] ps-6 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
               />
             </a>
           </div>

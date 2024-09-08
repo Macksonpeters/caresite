@@ -53,11 +53,14 @@ const Hero = () => {
   };
 
   const isNotMobile = useMediaQuery("(max-width: 1024px)");
-
-  const [currentImage, setCurrentImage] = useState<string>(
-    isNotMobile ? mobileImages[0] : images[0]
+  const [currentMobileImage, setCurrentMobileImage] = useState<string>(
+    mobileImages[0]
   );
+  const [currentImage, setCurrentImage] = useState<string>(images[0]);
+
   const [prevImage, setPrevImage] = useState<string>(currentImage);
+  const [prevMobileImage, setPrevMobileImage] =
+    useState<string>(currentMobileImage);
 
   useEffect(() => {
     // Preload images
@@ -69,24 +72,30 @@ const Hero = () => {
     const intervalId = setInterval(() => {
       if (currentImage === images[0] || currentImage === mobileImages[0]) {
         setPrevImage(currentImage);
-        setCurrentImage(isNotMobile ? mobileImages[1] : images[1]);
+        setPrevMobileImage(currentMobileImage);
+        setCurrentImage(images[1]);
+        setCurrentMobileImage(mobileImages[1]);
       } else if (
         currentImage === images[1] ||
         currentImage === mobileImages[1]
       ) {
         setPrevImage(currentImage);
-        setCurrentImage(isNotMobile ? mobileImages[2] : images[2]);
+        setPrevMobileImage(currentMobileImage);
+        setCurrentImage(images[2]);
+        setCurrentMobileImage(mobileImages[2]);
       } else if (
         currentImage === images[2] ||
         currentImage === mobileImages[2]
       ) {
         setPrevImage(currentImage);
-        setCurrentImage(isNotMobile ? mobileImages[0] : images[0]);
+        setPrevMobileImage(currentMobileImage);
+        setCurrentImage(images[0]);
+        setCurrentMobileImage(mobileImages[0]);
       }
     }, 7000);
 
     return () => clearInterval(intervalId);
-  }, [currentImage, !isNotMobile]);
+  }, [currentImage, isNotMobile]);
 
   return (
     <div
@@ -95,7 +104,7 @@ const Hero = () => {
       to right,
       rgba(0, 0, 0, 0.7),
       rgba(0, 0, 0, 0) 90%
-    ), url(${currentImage})`,
+    ), url(${isNotMobile ? currentMobileImage : currentImage})`,
         transition: "background-image 3s ease-in-out",
         height: "80vh",
         width: "100vw",

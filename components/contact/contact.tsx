@@ -59,7 +59,9 @@ const Contact = () => {
   return (
     <div
       className={`py-[10px]  px-5 lg:px-[100px] w-full  ${
-        pathname == "/" ? "lg:pt-[50px] lg:pb-[140px]" : "xl:py-[20px]"
+        pathname == "/"
+          ? " pb-[50px] lg:pt-[50px] lg:pb-[140px]"
+          : "xl:py-[20px]"
       }`}
     >
       {/* <p
