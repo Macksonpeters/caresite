@@ -34,3 +34,9 @@ const Postfn = async (
     }
   }
 };
+
+export const usePostFnHook = (url: any, token?: any) => {
+  return useMutation({
+    mutationFn: (data: any) => Postfn(data, url, token),
+  });
+};

@@ -5,6 +5,7 @@ import Header from "@/components/hero/header";
 import Navigation from "@/components/navigation/navigation";
 import Footer from "@/components/footer/footer";
 import { Providers } from "../hooks/provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className={domine.className}>
         <Providers>
           <main className=" flex flex-col mx-auto items-center justify-center overflow-x-hidden bg-[#fafafe] ">
+            <Toaster />
             <Header />
             <div className="w-full bg-[#421910]">
               <Navigation />

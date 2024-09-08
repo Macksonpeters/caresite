@@ -145,7 +145,7 @@ const Navigation = () => {
                   </ul>
                   <p className="text-justify pt-10 text-[14px] w-full">
                     <a
-                      href=""
+                      href="/contact"
                       className={` bg-[#640d57] flex justify-center w-full text-white text-[15px]  py-[20px]  rounded-[10px] mt-[-2px]`}
                     >
                       Contact us

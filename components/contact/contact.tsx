@@ -1,22 +1,75 @@
 "use client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { MdLocationPin, MdOutlineMail, MdPhone } from "react-icons/md";
 import ContactImg from "../../public/images/contactimg.png";
+import { usePostFnHook } from "@/hooks/hooks";
+import LoadingModal from "../common/loading/loadingmodal";
+import { ShowToast } from "../common/taost";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [message, setMessage] = useState("");
   const pathname = usePathname();
-  const handleSubmit = () => {};
+  const { toast } = useToast();
+
+  const SendMailMutate = usePostFnHook("/api/sendEmail");
+
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const payload = {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        number: phoneNumber,
+        message: message,
+      };
+      const response = await SendMailMutate.mutateAsync(payload);
+      console.log(response);
+
+      if (response?.status == 200) {
+        ShowToast(toast, "form submitted successfully", "success");
+        setEmail("");
+        setFirstName("");
+        setLastName("");
+        setPhoneNumber("");
+        setMessage("");
+        window.scrollTo(0, 0);
+      } else {
+        ShowToast(toast, response?.statusText, "error");
+      }
+    } catch (error) {
+      console.log(error);
+
+      const errorMessage: any = error;
+      ShowToast(
+        toast,
+        errorMessage?.response?.statusText || errorMessage,
+        "error"
+      );
+    }
+  };
   return (
     <div
       className={`py-[50px] lg:py-[100px] px-5 lg:px-[100px] w-full  ${
         pathname == "/services" ? "my-0" : "my-10 lg:my-20"
       }`}
     >
+      {/* <p
+        onClick={() => {
+          ShowToast(toast, "form submitted successfully", "success");
+        }}
+        className="bg-red-500 cursor-pointer "
+      >
+        Click
+      </p> */}
       <div className="flex flex-col lg:flex-row justify-between items-center gap-20 pb-[50px] lg:pb-0 lg:gap-4">
         <div className="lg:w-1/2">
           <h3
@@ -101,9 +154,9 @@ const Contact = () => {
               className="w-[1000px] h-[100px] object-cover"
             />
           </div>
-          <form className="mt-4 text-lg w-full" onSubmit={handleSubmit}>
+          <form className="mt-4 text-lg w-full" onSubmit={handleOnSubmit}>
             <div className="flex flex-wrap justify-center gap-4 w-full">
-              <div className="text-start w-[80vw] md:w-[300px]">
+              <div className="text-start w-[80vw] lg:w-[300px]">
                 <label
                   className="text-[15px] md:text-[17px] text-[#887d52]"
                   htmlFor="program"
@@ -116,10 +169,10 @@ const Contact = () => {
                   id="program"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="w-[80vw] text-black font-normal text-[15px] md:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white border border-text-[#887d52]"
+                  className="w-[80vw] text-black font-normal text-[15px] lg:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white border border-text-[#887d52]"
                 />
               </div>
-              <div className="text-start w-[80vw] md:w-[300px]">
+              <div className="text-start w-[80vw] lg:w-[300px]">
                 <label
                   className="text-[15px] md:text-[17px] text-[#887d52]"
                   htmlFor="program"
@@ -132,10 +185,10 @@ const Contact = () => {
                   id="program"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="w-[80vw] text-black font-normal text-[15px] md:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white "
+                  className="w-[80vw] text-black font-normal text-[15px] lg:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white "
                 />
               </div>
-              <div className="text-start w-[80vw] md:w-[300px]">
+              <div className="text-start w-[80vw] lg:w-[300px]">
                 <label
                   className="text-[15px] md:text-[17px] text-[#887d52]"
                   htmlFor="email"
@@ -148,10 +201,10 @@ const Contact = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-[80vw] text-black font-normal text-[15px] md:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white border border-text-[#887d52]"
+                  className="w-[80vw] text-black font-normal text-[15px] lg:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white border border-text-[#887d52]"
                 />
               </div>
-              <div className="text-start w-[80vw] md:w-[300px]">
+              <div className="text-start w-[80vw] lg:w-[300px]">
                 <label
                   className="text-[15px] md:text-[17px] text-[#887d52]"
                   htmlFor="program"
@@ -159,15 +212,15 @@ const Contact = () => {
                   Phone number
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="program"
                   id="program"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="w-[80vw] text-black font-normal text-[15px] md:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white border border-text-[#887d52]"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  className="w-[80vw] text-black font-normal text-[15px] lg:w-[300px] block ps-4 outline-none h-[45px] rounded-[10px] bg-white border border-text-[#887d52]"
                 />
               </div>
-              <div className="text-start w-[80vw] md:w-[300px]">
+              <div className="text-start w-[80vw] lg:w-[300px]">
                 <label
                   className="text-[15px] md:text-[17px] text-[#887d52]"
                   htmlFor="program"
@@ -177,9 +230,9 @@ const Contact = () => {
                 <textarea
                   name="program"
                   id="program"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="w-[80vw] text-black font-normal text-black font-normal text-[15px] md:w-[300px] block ps-4 outline-none h-[100px] rounded-[10px] bg-white border border-text-[#887d52]"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  className="w-[80vw] py-2 text-black font-normal text-[15px] lg:w-[300px] block ps-4 outline-none h-[100px] rounded-[10px] bg-white border border-text-[#887d52]"
                 />
               </div>
             </div>
@@ -189,7 +242,9 @@ const Contact = () => {
                   email?.length > 2 &&
                   email?.includes("@") &&
                   firstName?.length > 2 &&
-                  lastName?.length > 2
+                  lastName?.length > 2 &&
+                  phoneNumber?.length > 2 &&
+                  message?.length > 2
                     ? "flex"
                     : "pointer-events-none"
                 }`}
@@ -200,6 +255,13 @@ const Contact = () => {
           </form>
         </div>
       </div>
+
+      {SendMailMutate.isPending && (
+        <div className="h-[max-content]">
+          {" "}
+          <LoadingModal isOpen={SendMailMutate.isPending} />
+        </div>
+      )}
     </div>
   );
 };
