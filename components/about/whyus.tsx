@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useRef } from "react";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import SeniorImg from "../../public/images/seniortwo.jpg";
 import { HeroCarouselComponent } from "../carousel/carousel";
@@ -13,9 +13,17 @@ import CarouselImageFour from "../../public/images/seniorone.jpg";
 import CarouselImageFive from "../../public/images/seniorfour.png";
 import CarouselImageSix from "../../public/images/seniorsix.png";
 import CarouselImageSeven from "../../public/images/seniorseven.png";
+import "animate.css";
+import { motion, useInView } from "framer-motion";
 
 const WhyUs = () => {
   const pathname = usePathname();
+  const careValuesRef = useRef(null);
+  const missionRef = useRef(null);
+  const isInView = useInView(careValuesRef, { once: true });
+  const isMissionInView = useInView(missionRef, { once: true });
+
+  //   const isInView = useInView({ threshold: 1 }, "#careValues");
 
   const careValues = [
     {
@@ -58,7 +66,7 @@ const WhyUs = () => {
   ];
 
   return (
-    <div className="mt-[120px] lg:mt-[150px] px-5 lg:px-[100px] w-full flex justify-between">
+    <div className="mt-[120px] lg:mt-[150px] lg:pb-[150px] px-5 lg:px-[100px] w-full flex justify-between">
       <div className="w-full">
         <h3 className="text-[24px] mt-1 lg:mt-0 lg:text-[32px] 3xl:text-[2.5rem] font-[700] text-[#675b30] text-start">
           Why Us?
@@ -79,10 +87,13 @@ const WhyUs = () => {
             -PHILOSOPHY: “Compassionate Care & Dignified Living"
           </span>{" "}
           <br />
-          We believe that the golden years are a time to be celebrated,
-          cherished, and lived with dignity and joy. Our mission is to provide
-          compassionate, person-centered care that honors the unique needs and
-          wishes of every individual.{" "}
+          <span className={`${pathname == "/" ? "hidden" : "inline"}`}>
+            {" "}
+            We believe that the golden years are a time to be celebrated,
+            cherished, and lived with dignity and joy. Our mission is to provide
+            compassionate, person-centered care that honors the unique needs and
+            wishes of every individual.{" "}
+          </span>
           <span className={`${pathname == "/" ? "hidden" : "inline"}`}>
             We believe in empowering the elderly to live life to its fullest,
             providing not just care but companionship, comfort, and a sense of
@@ -96,45 +107,94 @@ const WhyUs = () => {
           <HeroCarouselComponent careTypes={careValues} />
         </div>
 
-        <div className="hidden lg:flex justify-between">
-          <div className="flex flex-col lg:w-1/2">
+        <div className={`hidden lg:flex   justify-between  `}>
+          <div
+            id="careValues"
+            className={`flex flex-wrap items-center lg:w-1/2 `}
+          >
             {careValues.map((item: any, index: number) => {
               return (
                 <div
                   key={index}
-                  className="w-full lg:pe-6 py-2 flex flex-col justify-center rounded-[10px]"
+                  className=" lg:pe-6 py-2 flex flex-col w-[max-content] justify-center rounded-[10px]"
                 >
-                  <div className="font-[700] text-[#887d52] flex items-center gap-2">
+                  <motion.div
+                    ref={careValuesRef}
+                    style={{
+                      transform: isInView ? "none" : "translateX(-200px)",
+                      opacity: isInView ? 1 : 0,
+                      transition:
+                        "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+                    }}
+                    className="font-[700] text-[#887d52] flex items-center gap-2 border border-[#887d52] rounded-[5px] w-[max-content] px-7 py-4"
+                  >
                     {" "}
                     <FaCircleArrowRight className="text-[18px]" /> {item.value}
-                  </div>
-                  <p className="text-justify text-[14px]">{item.description}</p>
+                  </motion.div>
+                  <p
+                    className={`text-justify text-[14px] ${
+                      pathname == "/" ? "hidden" : "hidden"
+                    }`}
+                  >
+                    {item.description}
+                  </p>
                 </div>
               );
             })}
           </div>
-          <div className="lg:w-1/2 flex items-center justify-end">
-            <div className=" border-r-2 border-b-2 border-[#887d52] lg:h-[50%] xl:h-[70%] w-[70%] lg:me-5">
+          <motion.div
+            ref={careValuesRef}
+            style={{
+              transform: isInView ? "none" : "translateX(200px)",
+              opacity: isInView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}
+            className="lg:w-1/2  flex items-center justify-center"
+          >
+            {/* <div className=" border-r-2 border-b-2 border-[#887d52] lg:h-[50%] xl:h-[100%] w-[70%] lg:me-5">
               <Image
                 src={SeniorImg}
                 width={1000}
                 height={50}
                 alt="nursing-img"
-                className="object-cover w-[90%] right-[4%] top-[30px] lg:top-auto lg:mt-[50px] relative lg:w-[40%] h-[200px] lg:h-[300px] lg:absolute rounded-[10px]"
+                className="object-cover w-[90%] right-[4%] top-[30px] lg:top-auto lg:mt-[10px] relative lg:w-[40%] h-[200px] lg:h-[300px] lg:absolute rounded-[10px]"
               />
-            </div>
-          </div>
+            </div> */}
+
+            <div className=" border-r-2 border-b-2 absolute lg:relative border-[#887d52] h-[27%] w-[90%] lg:w-[100%] lg:h-[70%] 2xl:h-[100%]"></div>
+            <Image
+              src={SeniorImg}
+              width={1000}
+              height={50}
+              alt="nursing-img"
+              className="object-cover w-[90%] md:w-[85%] 2xl:w-[38%] top-[50px] lg:top-auto relative lg:w-[40%] lg:mt-[100px] h-[200px] lg:h-[300px] lg:absolute rounded-[10px] lg:me-10"
+            />
+          </motion.div>
         </div>
 
         <div
-          className={`flex flex-col-reverse lg:flex-row justify-between mt-[50px] gap-10 lg:gap-2 lg:mt-[150px] ${
+          className={`  ${
+            pathname == "/" ? "hidden" : "hidden lg:block lg:h-[100px]"
+          }`}
+        ></div>
+
+        <div
+          className={`flex flex-col-reverse lg:flex-row justify-between mt-[50px] gap-10 lg:gap-2 lg:mt-[150px] 2xl:mt-[250px] ${
             pathname == "/" ? "hidden" : "flex"
           }`}
         >
-          <div className="w-full lg:w-1/2 flex items-center">
+          <motion.div
+            ref={missionRef}
+            style={{
+              transform: isMissionInView ? "none" : "translateY(-200px)",
+              opacity: isMissionInView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}
+            className="w-full lg:w-1/2 flex items-center"
+          >
             {/* <div className="hidden lg:block border-l-2 border-b-2 border-[#887d52] h-[80%] w-[70%]"></div> */}
 
-            <div className=" border-l-2 border-b-2 absolute lg:relative border-[#887d52] h-[27%] w-[90%] lg:w-[70%] lg:h-[80%]"></div>
+            <div className=" border-l-2 border-b-2 absolute lg:relative border-[#887d52] h-[27%] w-[90%] lg:w-[70%] lg:h-[80%] 2xl:h-[100%]"></div>
             <Image
               src={CarouselImageFive}
               width={1000}
@@ -142,8 +202,16 @@ const WhyUs = () => {
               alt="nursing-img"
               className="object-cover w-[90%] md:w-[85%] left-[4%] top-[50px] lg:top-auto relative lg:w-[40%] h-[200px] lg:h-[300px] lg:absolute rounded-[10px]"
             />
-          </div>
-          <div className="w-full lg:w-1/2">
+          </motion.div>
+          <motion.div
+            ref={missionRef}
+            style={{
+              transform: isMissionInView ? "none" : "translateY(-200px)",
+              opacity: isMissionInView ? 1 : 0,
+              transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+            }}
+            className="w-full lg:w-1/2"
+          >
             <h3 className="text-[24px] mt-1 lg:mt-0 lg:text-[32px] 3xl:text-[2.5rem] font-[700] text-[#675b30] text-start">
               Mission Statement{" "}
             </h3>
@@ -169,7 +237,7 @@ const WhyUs = () => {
               forward to caring for your parents,aunt,uncles and any senior
               citizen you desire us to provide love and care to.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

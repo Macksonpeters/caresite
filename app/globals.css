@@ -76,11 +76,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .heroBackground {
   background: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0) 90%
-    ),
-    url("../public/images/homecaremobile.jpg");
+    to right,
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0) 90%
+  );
   height: 80vh;
   width: 100vw;
   overflow-x: hidden;
@@ -88,6 +87,9 @@ input[type="number"]::-webkit-outer-spin-button {
   background-size: cover;
   overflow-y: hidden;
 }
+
+/* ,
+    url("../public/images/homecaremobile.jpg") */
 
 ::-webkit-scrollbar {
   width: 6px;
@@ -190,16 +192,19 @@ input[type="number"]::-webkit-outer-spin-button {
 @media screen and (min-width: 1024px) {
   .heroBackground {
     background: linear-gradient(
-        to right,
-        rgba(0, 0, 0, 0.7),
-        rgba(0, 0, 0, 0) 90%
-      ),
-      url("../public/images/homecare.jpg");
+      to right,
+      rgba(0, 0, 0, 0.7),
+      rgba(0, 0, 0, 0) 90%
+    );
     height: 80vh;
     width: 100vw;
     overflow-x: hidden;
     background-repeat: no-repeat;
     background-size: cover;
     overflow-y: hidden;
+    transition: background-image 1s ease-in-out;
   }
 }
+
+/* ,
+      url("../public/images/homecare.jpg") */

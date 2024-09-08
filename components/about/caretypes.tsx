@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { FaArrowRight, FaNotesMedical } from "react-icons/fa6";
 import Modal from "./components/modal";
 import { usePathname } from "next/navigation";
@@ -12,11 +12,14 @@ import CarouselImageFour from "../../public/images/seniorone.jpg";
 import CarouselImageFive from "../../public/images/seniorfour.png";
 import CarouselImageSix from "../../public/images/seniorsix.png";
 import CarouselImageSeven from "../../public/images/seniorseven.png";
+import { motion, useInView } from "framer-motion";
 
 const CareTypes = () => {
   const [modalData, setModalData] = useState<any>(null);
   const [openModal, setOpenModal] = useState<boolean>(false);
   const pathname = usePathname();
+  const careValuesRef = useRef(null);
+  const isInView = useInView(careValuesRef, { once: true });
 
   const careTypes = [
     {
@@ -208,8 +211,14 @@ const CareTypes = () => {
   ];
 
   return (
-    <div
-      className={`pt-[50px]  lg:pt-[100px] px-5 lg:px-[100px] w-full bg-[#fffdfd] ${
+    <motion.div
+      ref={careValuesRef}
+      style={{
+        transform: isInView ? "none" : "translateY(200px)",
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+      }}
+      className={`pt-[50px] lg:pt-[100px] px-5 lg:px-[100px] w-full bg-[#fffdfd] ${
         pathname == "/services" ? "my-0" : "my-20"
       }`}
     >
@@ -360,7 +369,7 @@ const CareTypes = () => {
         openModal={openModal}
         data={modalData}
       />
-    </div>
+    </motion.div>
   );
 };
 

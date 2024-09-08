@@ -213,7 +213,7 @@ const Footer = () => {
               //   width={100}
               //   height={50}
               alt="Joyce-home-logo"
-              className="inline object-contain w-[inherit]  scale-[370%] h-[90px] ps-10 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
+              className="inline object-contain w-[inherit] scale-[370%] h-[90px] ps-10 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
             />
             <ul className="flex flex-col  text-[#887d52] gap-3 mt-4 justify-between">
               {careTypes.slice(0, 4)?.map((item: any, index: any) => {

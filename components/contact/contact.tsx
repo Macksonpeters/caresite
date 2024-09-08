@@ -58,8 +58,8 @@ const Contact = () => {
   };
   return (
     <div
-      className={`py-[50px] lg:py-[100px] px-5 lg:px-[100px] w-full  ${
-        pathname == "/services" ? "my-0" : "my-10 lg:my-20"
+      className={`py-[10px]  px-5 lg:px-[100px] w-full  ${
+        pathname == "/" ? "xl:py-[50px]" : "xl:py-[20px]"
       }`}
     >
       {/* <p
@@ -70,11 +70,15 @@ const Contact = () => {
       >
         Click
       </p> */}
-      <div className="flex flex-col lg:flex-row justify-between items-center gap-20 pb-[50px] lg:pb-0 lg:gap-4">
+      <div
+        className={`flex flex-col lg:flex-row justify-between  gap-[60px] pb-[50px] lg:pb-0 lg:gap-4 ${
+          pathname == "/" && "items-center"
+        }`}
+      >
         <div className="lg:w-1/2">
           <h3
             className={`text-[19px] text-start font-[700] text-[#887d52] 3xl:text-[1.8rem] ${
-              pathname == "/services" ? "hidden" : "block"
+              pathname == "/services" ? "hidden" : "block text-white"
             }`}
           >
             Contact us
