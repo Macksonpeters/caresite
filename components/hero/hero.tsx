@@ -87,6 +87,7 @@ const Hero = () => {
 
     return () => clearInterval(intervalId);
   }, [currentImage, !isNotMobile]);
+
   return (
     <div
       style={{
@@ -95,9 +96,15 @@ const Hero = () => {
       rgba(0, 0, 0, 0.7),
       rgba(0, 0, 0, 0) 90%
     ), url(${currentImage})`,
-        transition: "background-image 5s ease-in-out",
+        transition: "background-image 3s ease-in-out",
+        height: "80vh",
+        width: "100vw",
+        overflowX: "hidden",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        overflowY: "hidden",
       }}
-      className={`heroBackground text-gray-200 flex flex-col justify-center pt-[100px] px-5 lg:px-[100px]`}
+      className={` text-gray-200 flex flex-col justify-center pt-[100px] px-5 lg:px-[100px]`}
       id="home"
     >
       {" "}
