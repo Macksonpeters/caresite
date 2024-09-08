@@ -5,7 +5,6 @@ import { FaArrowRight, FaNotesMedical } from "react-icons/fa6";
 import Modal from "./components/modal";
 import { usePathname } from "next/navigation";
 import { FeatureCarouselComponent } from "../carousel/carousel";
-import ServicesSlider from "../features/components/featureSlider";
 import CarouselImageOne from "../../public/images/homecare.jpg";
 import CarouselImageTwo from "../../public/images/seniortwo.jpg";
 import CarouselImageThree from "../../public/images/seniorthree.png";
