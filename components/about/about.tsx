@@ -79,7 +79,7 @@ const About = () => {
           compassionate home care services that cater to the unique needs of
           each of our senior citizens. Our goal is to enhance the quality of
           life for your loved ones while allowing them to maintain independence
-          in the comfort of own home.;
+          in the comfort of our residential homes.;
           <br />
           We understand how busy life can be and how much you want to take care
           of your loved ones while still working to provide them with the best

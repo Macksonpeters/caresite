@@ -269,7 +269,7 @@ const Footer = () => {
                 {" "}
                 <MdLocationPin className="text-[20px] me-2" />{" "}
               </p>
-              <p> 11081 Sands Point Drive, Houston Texas,77072</p>
+              <p> 11018 Sands Point Drive, Houston Texas,77072</p>
             </a>
           </div>
         </div>

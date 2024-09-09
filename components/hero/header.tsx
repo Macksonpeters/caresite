@@ -27,6 +27,9 @@ const Header = () => {
         </p>
         <BsDash className="hidden lg:inline text-[18px]" />
 
+        <p className="flex">24 Hours Care</p>
+        <BsDash className="inline text-[18px]" />
+
         <div className="flex gap-4 items-center ">
           <div className="flex items-center gap-1">
             <GiClover className="inline" />

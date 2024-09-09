@@ -119,7 +119,7 @@ const GallerySlider = ({ data, direction }: Props) => {
       img: CarouselImageThree,
       details: [
         "Physical Therapy Assistance: Exercise Support: Assisting with prescribed exercises to improve mobility, strength, and balance.",
-        "Therapy Coordination: Working with physical or occupational therapists to reinforce rehabilitation goals.",
+        "Therapy Coordination: Working with physical or occupational therapists to reinforce rehabilitation goals. Nurses and doctors come to the home to see the residents",
         "Mobility Training: Use of Aids: Supporting the use of walkers, canes, or wheelchairs.",
         "Fall Prevention: Teaching safe movement techniques to reduce the risk of falls.",
       ],
