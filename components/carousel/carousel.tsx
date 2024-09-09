@@ -48,6 +48,7 @@ export const HeroCarouselComponent = ({
               >
                 <div className="flex pt-3">
                   <Image
+                    priority={true}
                     src={item.img}
                     height={50}
                     width={1000}
@@ -133,6 +134,68 @@ export const FeatureCarouselComponent = ({
                 >
                   Read more
                 </button>
+              </div>
+            );
+          })}
+        </Carousel>
+      </div>
+    </div>
+  );
+};
+
+export const BackgroundCarouselComponent = ({
+  careTypes,
+  setModalData,
+  setOpenModal,
+}: Props) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleSlideChange = (index: number) => {
+    setActiveIndex(index);
+  };
+
+  return (
+    <div>
+      <div className="text-white mx-auto w-[90vw] lg:w-[45vw]">
+        <Carousel
+          showArrows={false}
+          showThumbs={false}
+          showStatus={false}
+          autoPlay={true}
+          infiniteLoop={true}
+          showIndicators={false}
+          stopOnHover={true}
+          swipeable={false}
+          transitionTime={2000}
+          //   dynamicHeight={false}
+          onChange={handleSlideChange}
+          interval={5000}
+        >
+          {careTypes.map((item: any, index: number) => {
+            return (
+              <div
+                key={index}
+                className=" py-2 flex flex-col gap-10 px-5 mx-2 border border-[#887d52] h-[450px]  rounded-[10px]"
+              >
+                <div className="flex pt-3">
+                  <Image
+                    src={item.img}
+                    height={50}
+                    width={1000}
+                    alt="Committment-images"
+                    className="object-cover max-h-[200px] rounded-[5px]"
+                  />
+                </div>
+                <div>
+                  <div className="font-[700] text-[#887d52] flex items-center gap-2">
+                    {" "}
+                    <FaCircleArrowRight className="text-[18px]" />{" "}
+                    <span>{item.value}</span>
+                  </div>
+                  <p className="text-justify text-[14px] text-black">
+                    {item.description}
+                  </p>
+                </div>
               </div>
             );
           })}

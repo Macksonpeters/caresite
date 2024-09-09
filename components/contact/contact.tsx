@@ -1,13 +1,14 @@
 "use client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
 import { MdLocationPin, MdOutlineMail, MdPhone } from "react-icons/md";
 import ContactImg from "../../public/images/contactimg.png";
 import { usePostFnHook } from "@/hooks/hooks";
 import LoadingModal from "../common/loading/loadingmodal";
 import { ShowToast } from "../common/taost";
 import { useToast } from "@/hooks/use-toast";
+import { motion, useInView } from "framer-motion";
 
 const Contact = () => {
   const [email, setEmail] = useState("");
@@ -17,6 +18,10 @@ const Contact = () => {
   const [message, setMessage] = useState("");
   const pathname = usePathname();
   const { toast } = useToast();
+  const contactViewRef = useRef(null);
+  const formViewRef = useRef(null);
+  const isInView = useInView(contactViewRef, { once: true });
+  const isFormInView = useInView(formViewRef, { once: true });
 
   const SendMailMutate = usePostFnHook("/api/sendEmail");
 
@@ -77,7 +82,15 @@ const Contact = () => {
           pathname == "/" && "items-center"
         }`}
       >
-        <div className="lg:w-1/2">
+        <motion.div
+          ref={contactViewRef}
+          style={{
+            transform: isInView ? "none" : "translateX(200px)",
+            opacity: isInView ? 1 : 0,
+            transition: "all 1.1s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+          }}
+          className="lg:w-1/2"
+        >
           <h3
             className={`text-[19px] text-start font-[700] text-[#887d52] 3xl:text-[1.8rem] ${
               pathname == "/services" ? "hidden" : "block text-white"
@@ -137,8 +150,14 @@ const Contact = () => {
               </a>
             </div>
           </div>
-        </div>
-        <div
+        </motion.div>
+        <motion.div
+          ref={formViewRef}
+          style={{
+            transform: isFormInView ? "none" : "translateY(200px)",
+            opacity: isFormInView ? 1 : 0,
+            transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+          }}
           className={`lg:w-1/2 2xl:mx-[100px] bg-[#e3e1db] h-[max-content] py-10 rounded-[15px] ${
             pathname == "/" && "border-[5px] border-[#887d52]"
           }`}
@@ -153,6 +172,7 @@ const Contact = () => {
 
           <div>
             <Image
+              priority={true}
               src={ContactImg}
               alt="contact-img"
               width={1000}
@@ -259,7 +279,7 @@ const Contact = () => {
               </button>
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
 
       {SendMailMutate.isPending && (
