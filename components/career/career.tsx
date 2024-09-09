@@ -1,10 +1,11 @@
 "use client";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { BsDashLg } from "react-icons/bs";
 import { MdLocationPin, MdOutlineMail, MdPhone } from "react-icons/md";
 import CareerImg from "../../public/images/career.jpg";
+import { motion, useInView } from "framer-motion";
 
 const Career = () => {
   const [email, setEmail] = useState("");
@@ -12,8 +13,17 @@ const Career = () => {
   const [lastName, setLastName] = useState("");
   const pathname = usePathname();
   const handleSubmit = () => {};
+
+  const careValuesRef = useRef(null);
+  const isInView = useInView(careValuesRef, { once: true });
   return (
-    <div
+    <motion.div
+      ref={careValuesRef}
+      style={{
+        transform: isInView ? "none" : "translateY(200px)",
+        opacity: isInView ? 1 : 0,
+        transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+      }}
       className={`py-[10px] lg:py-[20px] px-5 lg:px-[100px] w-full  ${
         pathname == "/services" ? "my-0" : "my-0"
       }`}
@@ -246,7 +256,7 @@ const Career = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

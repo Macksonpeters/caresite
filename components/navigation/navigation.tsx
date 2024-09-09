@@ -16,6 +16,7 @@ import FullLogo from "../../public/images/logoone (1).png";
 import ShortLogo from "../../public/images/logotwo.png";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Navigation = () => {
   const [header, setHeader] = useState<any>(0);
@@ -67,7 +68,7 @@ const Navigation = () => {
     >
       <div className="flex px-5 lg:px-[100px] justify-between items-center gap-4 w-full py-3 text-[18px] 3xl:text-[1.6rem] text-[#421910]">
         <div className="w-1/4 flex items-center">
-          <a href="/" className="">
+          <Link href="/" className="">
             <Image
               src={FullLogo}
               priority={true}
@@ -77,7 +78,7 @@ const Navigation = () => {
               alt="Joyce-home-logo"
               className="inline object-contain w-[inherit] scale-[370%] h-[90px] ps-7 sm:ps-10 lg:ps-7 lg:h-[70px] pt-[2px]"
             />
-          </a>
+          </Link>
         </div>
         <div className="hidden lg:block w-2/4">
           <ul className="flex justify-between lg:text-[14px] xl:text-[17px]">
@@ -92,19 +93,19 @@ const Navigation = () => {
                       : "text-[#ac523e] scale-100"
                   } transition-transform duration-300`}
                 >
-                  <a href={item.path}>{item?.name}</a>
+                  <Link href={item.path}>{item?.name}</Link>
                 </li>
               );
             })}
           </ul>
         </div>
         <div className="hidden w-1/4 lg:flex justify-end">
-          <a
+          <Link
             href="/contact"
             className={` bg-[#675b30] hover:bg-[#640d57] text-white text-[15px] 3xl:text-[1.2rem] py-[10px] px-4 xl:px-7 rounded-[5px] mt-[-2px]`}
           >
             Contact <span className="hidden xl:inline">us</span>
-          </a>
+          </Link>
         </div>
         <div className="lg:hidden">
           <Sheet>
@@ -139,19 +140,19 @@ const Navigation = () => {
                           } transition-transform duration-300`}
                         >
                           <SheetClose className="capitalize outline-none">
-                            <a href={item.path}>{item?.name}</a>
+                            <Link href={item.path}>{item?.name}</Link>
                           </SheetClose>
                         </li>
                       );
                     })}
                   </ul>
                   <p className="text-justify pt-10 text-[14px] w-full">
-                    <a
+                    <Link
                       href="/contact"
                       className={` bg-[#640d57] flex justify-center w-full text-white text-[15px]  py-[20px]  rounded-[10px] mt-[-2px]`}
                     >
                       Contact us
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </SheetHeader>
