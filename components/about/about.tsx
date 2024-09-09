@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import React, { useRef } from "react";
-import SeniorImg from "../../public/images/seniorone.jpg";
+import SeniorImg from "../../public/images/seniortenn.png";
+import SeniorImgTwo from "../../public/images/seniortensmall.jpg";
 import { motion, useInView } from "framer-motion";
 
 const About = () => {
@@ -37,15 +38,22 @@ const About = () => {
           opacity: isImgInView ? 1 : 0,
           transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
         }}
-        className="lg:w-1/2  flex  items-center"
+        className="lg:w-1/2  flex flex-col lg:flex-row items-center"
       >
-        <div className=" border-r-2 border-b-2 absolute lg:relative border-[#887d52] h-[27%] w-[90%] lg:w-[70%] lg:h-[80%]"></div>
+        <div className=" border-r-2 border-b-2 absolute lg:relative border-[#887d52]  h-[27%] w-[90%] lg:w-[70%] lg:h-[80%]"></div>
         <Image
           src={SeniorImg}
           width={1000}
           height={50}
           alt="nursing-img"
-          className="object-cover w-[90%] md:w-[85%] left-[4%] top-[50px] lg:top-auto relative lg:w-[40%] h-[200px] lg:h-[300px] lg:absolute rounded-[10px]"
+          className="object-cover  w-[90%] md:w-[83%] left-[4%] top-[50px] z-10 mt-[20px] ms-8 sm:ms-10 lg:top-[auto] lg:mt-[-150px] lg:w-[40%] h-[200px] lg:h-[220px] lg:absolute rounded-[10px]"
+        />
+        <Image
+          src={SeniorImgTwo}
+          width={1000}
+          height={50}
+          alt="nursing-img"
+          className="object-cover w-[93%] md:w-[85%] left-[0%] me-5 sm:me-[50px] z-20 lg:me-0 lg:left-[4%] top-[50px] mt-[-120px] lg:top-auto lg:mt-[150px] relative lg:w-[40%] h-[200px] lg:h-[220px] lg:absolute rounded-[10px]"
         />
       </motion.div>
       <div className="lg:w-1/2">

@@ -9,7 +9,7 @@ export async function POST(request) {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "webbroconsults@gmail.com",
+        user: "joycecarehome14@gmail.com",
         pass: process.env.EMAIL_PASSWORD, // Ensure this is correctly set
       },
       secure: true, // Use SSL
@@ -20,8 +20,7 @@ export async function POST(request) {
       from: "no-reply@joycecarehome.com",
       to: "capitalintensive5@gmail.com",
       subject: "Joyce Home  Care Website Contact Form - " + firstName,
-      html: `
-      <!DOCTYPE html>
+      html: `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -29,62 +28,72 @@ export async function POST(request) {
   <title>Email Template</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #f4f7f6;
       margin: 0;
-      padding: 20px;
+      padding: 0;
+      color: #555;
     }
     .email-container {
-      background-color: #fff;
-      padding: 20px;
       max-width: 600px;
-      margin: 0 auto;
-      border: 1px solid #ddd;
+      margin: 40px auto;
+      background-color: #e3fafa;
       border-radius: 10px;
-    }
-    h1 {
-      color: #675b30;
-      font-size: 24px;
-      text-align: center;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
     .header {
-      background-color: #ac523e;
-      color: #fff;
-      padding: 10px;
-      border-radius: 8px 8px 0 0;
+      background: linear-gradient(90deg, #75C7C3, #68A0F3);
+      color: white;
+      padding: 20px;
       text-align: center;
     }
-    .content {
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 0 0 8px 8px;
-    }
-    .content p {
-      color: #887d52;
-      font-size: 16px;
-    }
-    .label {
-      color: #675b30;
+    h1 {
+      margin: 0;
+      font-size: 24px;
       font-weight: bold;
     }
-    .footer {
-      margin-top: 20px;
+    .content {
+      padding: 30px;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+    }
+    .content p {
+      margin: 0 0 15px;
+    }
+    .label {
+      font-weight: bold;
+      color: #333;
+    }
+    .message {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+    .button-container {
       text-align: center;
-      font-size: 12px;
-      color: #887d52;
+      margin: 30px 0;
     }
     .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #ac523e;
+      background-color: #68A0F3;
       color: white;
+      padding: 12px 30px;
+      border-radius: 8px;
       text-decoration: none;
-      border-radius: 5px;
-      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
     }
     .button:hover {
-      background-color: #675b30;
+      background-color: #4b85d4;
+    }
+    .footer {
+      background-color: #B4E2E3;
+      padding: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
     }
   </style>
 </head>
@@ -93,19 +102,20 @@ export async function POST(request) {
     <div class="header">
       <h1>Contact Information</h1>
     </div>
-    
-    <div class="content">
-      <p><span class="label">First Name:</span> ${firstName}</p>
-      <p><span class="label">Last Name:</span> ${lastName}</p>
-      <p><span class="label">Email:</span> ${email}</p>
-      <p><span class="label">Phone Number:</span> ${number}</p>
-      <p><span class="label">Message:</span></p>
-      <p>${message}</p>
 
+    <div class="content">
+      <p class="label">First Name: ${firstName}</p>
+      <p class="label">Last Name: ${lastName}</p>
+      <p class="label">Email: ${email}</p>
+      <p class="label">Phone Number: ${number}</p>
+      <p class="label">Message:</p>
+      <p class="message">${message}</p>
     </div>
 
+  
+
     <div class="footer">
-      <p> Copyright © ${new Date().getFullYear()} Joyce Care Home . All rights reserved.</p>
+      <p>&copy; ${new Date().getFullYear()} Joyce Care Home. All rights reserved.</p>
     </div>
   </div>
 </body>

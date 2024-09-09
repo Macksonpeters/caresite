@@ -15,13 +15,16 @@ import CarouselImageSix from "../../public/images/seniorsix.png";
 import CarouselImageSeven from "../../public/images/seniorseven.png";
 import "animate.css";
 import { motion, useInView } from "framer-motion";
+import GallerySlider from "./components/slider";
 
 const WhyUs = () => {
   const pathname = usePathname();
   const careValuesRef = useRef(null);
   const missionRef = useRef(null);
+  const sliderRef = useRef(null);
   const isInView = useInView(careValuesRef, { once: true });
   const isMissionInView = useInView(missionRef, { once: true });
+  const issliderInView = useInView(sliderRef, { once: true });
 
   //   const isInView = useInView({ threshold: 1 }, "#careValues");
 
@@ -66,7 +69,7 @@ const WhyUs = () => {
   ];
 
   return (
-    <div className="mt-[120px] lg:mt-[150px] lg:pb-[150px] px-5 lg:px-[100px] w-full flex justify-between">
+    <div className="mt-[120px] lg:mt-[150px] lg:pb-[0px] px-5 lg:px-[100px] w-full flex flex-col gap-[120px] lg:gap-[200px]">
       <div className="w-full">
         <h3 className="text-[24px] mt-1 lg:mt-0 lg:text-[32px] 3xl:text-[2.5rem] font-[700] text-[#675b30] text-start">
           Why Us?
@@ -240,6 +243,18 @@ const WhyUs = () => {
           </motion.div>
         </div>
       </div>
+
+      <motion.div
+        ref={sliderRef}
+        style={{
+          transform: issliderInView ? "none" : "translateX(200px)",
+          opacity: issliderInView ? 1 : 0,
+          transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
+        }}
+        className="hidden lg:flex"
+      >
+        <GallerySlider />
+      </motion.div>
     </div>
   );
 };

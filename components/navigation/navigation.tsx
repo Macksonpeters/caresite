@@ -41,8 +41,8 @@ const Navigation = () => {
       path: "/careers",
     },
     {
-      name: "Contact us",
-      path: "/contact",
+      name: "Payment",
+      path: "/payment",
     },
   ];
 
@@ -104,7 +104,7 @@ const Navigation = () => {
             href="/contact"
             className={` bg-[#675b30] hover:bg-[#640d57] text-white text-[15px] 3xl:text-[1.2rem] py-[10px] px-4 xl:px-7 rounded-[5px] mt-[-2px]`}
           >
-            Contact <span className="hidden xl:inline">us</span>
+            Contact <span className="">us</span>
           </Link>
         </div>
         <div className="lg:hidden">

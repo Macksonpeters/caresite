@@ -23,6 +23,5 @@ export const ShowToast = (
     variant: "destructive",
     title: title,
     className: `${toastStyles} ${lato.className} border-none outline-none fixed right-1 w-[80%] md:w-[50%] max-w-[400px] lg:max-w-[400px] top-2 h-[70px]`,
-    duration: duration || 10000,
   });
 };
