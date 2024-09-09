@@ -211,7 +211,7 @@ const GallerySlider = ({ data, direction }: Props) => {
   ];
 
   return (
-    <div className=" xScroller overflow-x-scroll flex gap-4 lg:gap-8 max-w-[90vw] lg:w-[100%] ">
+    <div className=" xScroller overflow-x-scroll flex gap-4 lg:gap-8 max-w-[85vw] lg:w-[100%] ">
       {careTypes.slice(0, 10).map((item: any, index: any) => {
         return (
           <div className="w-[80%] lg:w-[40%]  flex-shrink-0" key={index}>
