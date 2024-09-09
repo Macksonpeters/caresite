@@ -140,19 +140,19 @@ const Navigation = () => {
                           } transition-transform duration-300`}
                         >
                           <SheetClose className="capitalize outline-none">
-                            <Link href={item.path}>{item?.name}</Link>
+                            <a href={item.path}>{item?.name}</a>
                           </SheetClose>
                         </li>
                       );
                     })}
                   </ul>
                   <p className="text-justify pt-10 text-[14px] w-full">
-                    <Link
+                    <a
                       href="/contact"
                       className={` bg-[#640d57] flex justify-center w-full text-white text-[15px]  py-[20px]  rounded-[10px] mt-[-2px]`}
                     >
                       Contact us
-                    </Link>
+                    </a>
                   </p>
                 </div>
               </SheetHeader>
