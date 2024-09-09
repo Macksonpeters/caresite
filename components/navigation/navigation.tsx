@@ -70,6 +70,8 @@ const Navigation = () => {
           <a href="/" className="">
             <Image
               src={FullLogo}
+              priority={true}
+              quality={100}
               //   width={100}
               //   height={50}
               alt="Joyce-home-logo"

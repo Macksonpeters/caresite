@@ -10,21 +10,21 @@ const lato = Lato({
   style: "normal",
 });
 
+const images = [
+  "/images/homecare.jpg",
+  "/images/seniortwo.jpg",
+  "/images/seniorseven.jpg",
+];
+
+const mobileImages = [
+  "/images/homecaremobile.jpg",
+  "/images/seniortwomobile.jpg",
+  "/images/seniorsevenmobile.jpg",
+];
+
 const Hero = () => {
   const [header, setHeader] = useState<any>(null);
   const [openComingSoon, setOpenComingSoon] = useState<any>(null);
-
-  const images = [
-    "/images/homecare.jpg",
-    "/images/seniortwo.jpg",
-    "/images/seniorseven.jpg",
-  ];
-
-  const mobileImages = [
-    "/images/homecaremobile.jpg",
-    "/images/seniortwomobile.jpg",
-    "/images/seniorsevenmobile.jpg",
-  ];
 
   const headers = [
     {
@@ -52,68 +52,74 @@ const Hero = () => {
     }
   };
 
-  const isNotMobile = useMediaQuery("(max-width: 1024px)");
-  const [currentMobileImage, setCurrentMobileImage] = useState<string>(
-    mobileImages[0]
-  );
-  const [currentImage, setCurrentImage] = useState<string>(images[0]);
-
-  const [prevImage, setPrevImage] = useState<string>(currentImage);
-  const [prevMobileImage, setPrevMobileImage] =
-    useState<string>(currentMobileImage);
+  const isNotMobile = useMediaQuery("(min-width: 1024px)");
+  const [currentImage, setCurrentImage] = useState(images[0]);
+  const [currentMobileImage, setCurrentMobileImage] = useState(mobileImages[0]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [nextImage, setNextImage] = useState(images[0]); // Track the next image for smooth transition
 
   useEffect(() => {
-    // Preload images
-    [...images, ...mobileImages].forEach((src) => {
-      const img = new Image();
-      img.src = src;
+    const preloadImages = [...images, ...mobileImages].map((src) => {
+      return new Promise<void>((resolve) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => resolve();
+      });
     });
 
+    Promise.all(preloadImages).then(() => setIsLoaded(true));
+
     const intervalId = setInterval(() => {
-      if (currentImage === images[0] || currentImage === mobileImages[0]) {
-        setPrevImage(currentImage);
-        setPrevMobileImage(currentMobileImage);
-        setCurrentImage(images[1]);
-        setCurrentMobileImage(mobileImages[1]);
-      } else if (
-        currentImage === images[1] ||
-        currentImage === mobileImages[1]
-      ) {
-        setPrevImage(currentImage);
-        setPrevMobileImage(currentMobileImage);
-        setCurrentImage(images[2]);
-        setCurrentMobileImage(mobileImages[2]);
-      } else if (
-        currentImage === images[2] ||
-        currentImage === mobileImages[2]
-      ) {
-        setPrevImage(currentImage);
-        setPrevMobileImage(currentMobileImage);
-        setCurrentImage(images[0]);
-        setCurrentMobileImage(mobileImages[0]);
+      if (isNotMobile) {
+        setNextImage((prev) => {
+          if (prev === images[0]) return images[1];
+          if (prev === images[1]) return images[2];
+          return images[0];
+        });
+      } else {
+        setNextImage((prev) => {
+          if (prev === mobileImages[0]) return mobileImages[1];
+          if (prev === mobileImages[1]) return mobileImages[2];
+          return mobileImages[0];
+        });
       }
     }, 7000);
 
     return () => clearInterval(intervalId);
-  }, [currentImage, isNotMobile]);
+  }, [isNotMobile]);
+
+  // Handle applying the new image after a short delay
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentImage(nextImage);
+      setCurrentMobileImage(nextImage);
+    }, 100); // Adjust delay to match smoothness
+    return () => clearTimeout(timer);
+  }, [nextImage]);
+
+  const mobileTransition = "background-image 2s ease-in-out";
+  const desktopTransition = "all 20s ease-in-out";
 
   return (
     <div
       style={{
-        backgroundImage: `linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.7),
-      rgba(0, 0, 0, 0) 90%
-    ), url(${isNotMobile ? currentMobileImage : currentImage})`,
-        transition: "background-image 3s ease-in-out",
+        backgroundImage: isLoaded
+          ? `linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.7),
+            rgba(0, 0, 0, 0) 90%
+          ), url(${isNotMobile ? currentImage : currentMobileImage})`
+          : "",
+        backgroundColor: isLoaded ? "transparent" : "#000",
+        transition: isNotMobile ? desktopTransition : mobileTransition,
         height: "80vh",
         width: "100vw",
-        overflowX: "hidden",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
+        overflowX: "hidden",
         overflowY: "hidden",
       }}
-      className={` text-gray-200 flex flex-col justify-center pt-[100px] px-5 lg:px-[100px]`}
+      className="text-gray-200 flex flex-col justify-center pt-[100px] px-5 lg:px-[100px]"
       id="home"
     >
       {" "}

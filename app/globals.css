@@ -104,6 +104,25 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 3px;
 }
 
+.marquee-text {
+  /* display: inline; */
+  white-space: nowrap; /* Ensure the text doesn't break */
+  animation: marquee 30s linear infinite; /* Speed and looping */
+}
+
+#home {
+  -webkit-transition: background-image 3s ease-in-out !important;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%); /* Start off to the right */
+  }
+  100% {
+    transform: translateX(-100%); /* End off to the left */
+  }
+}
+
 @keyframes zoomIn {
   0% {
     transform: scale(1);
