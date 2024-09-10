@@ -18,7 +18,7 @@ export async function POST(request) {
 
     const mailOption = {
       from: "no-reply@joycecarehome.com",
-      to: "capitalintensive5@gmail.com",
+      to: "joycecarehome14@yahoo.com",
       subject: "Joyce Home  Care Website Contact Form - " + firstName,
       html: `<!DOCTYPE html>
 <html lang="en">
